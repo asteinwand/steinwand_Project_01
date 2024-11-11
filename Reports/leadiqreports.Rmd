@@ -1,0 +1,54 @@
+---
+title: "leadiqconsulting"
+author: "Aimee Steinwand"
+date: "2024-10-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+2. 
+
+A.
+
+IQdata <- read.csv("C:/Users/stein/OneDrive/Documents/School/Consulting/steinwand_Project_01/DataRaw/lead-iq-01.csv")
+
+IQ <- IQdata[,2]
+Smelter <- IQdata[,1]
+
+boxplot(IQ ~ Smelter, IQdata = data, main = "IQ Based on Distance", xlab = "Distance", ylab = "IQ")
+
+B.
+
+kable(IQdata)
+
+C.
+
+The graph is very compressed due to an outlier in the Far group, and the table is not extremely helpful either in summarizing the data. I think it would be better if the table was an average of IQ scores based on their distance rather than just a list of all of the scores. Maybe this means making a table out of the data from D instead?
+
+D. 
+
+install.packages("dplyr")
+library(dplyr)
+
+mean_values <- IQdata %>%
+  group_by(Smelter) %>%
+  summarize(mean_values = mean(IQ, na.rm = TRUE))
+  
+print(mean_values)
+
+E. 
+
+I am unsure what R-code chunk is supposed to be in this question. 
+
+3.
+
+Yes noticed the outlier in the far group. It makes sense that someone's IQ is not 999 and in fact is 99.
+
+IQdata <- replace(IQdata, IQdata == 999, 99)
+
+boxplot(IQ ~ Smelter, IQdata = data, main = "IQ Based on Distance", xlab = "Distance", ylab = "IQ")
+
+If I look in the data set for IQdata, the 999 is changed to 99, but I am unsure why the boxplot is not updated to remove the outlier. 
